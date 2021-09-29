@@ -19,7 +19,7 @@ class CreatePropertiesTable extends Migration
             $table->string('district');
             $table->string('street');
             $table->string('number');
-            $table->string('complement');
+            $table->string('complement')->nullable();
             $table->string('city');
             $table->string('uf', 2);
             $table->integer('bedrooms')->nullable();

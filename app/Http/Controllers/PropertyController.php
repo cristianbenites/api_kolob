@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Http\Requests\PostUpdatePropertyRequest;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -30,12 +31,12 @@ class PropertyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PostUpdatePropertyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostUpdatePropertyRequest $request)
     {
-        Property::create($request->all());
+        Property::create($request->validated());
     }
 
     /**
