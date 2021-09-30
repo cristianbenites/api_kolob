@@ -20,3 +20,6 @@ Route::get('/', function () {
 });
 
 Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+Route::put('/properties/{property}', [PropertyController::class, 'update'])->name('properties.update');
+Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+Route::put('/properties/{property}/restore', [PropertyController::class, 'restore'])->name('properties.restore');
