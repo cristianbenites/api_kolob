@@ -64,13 +64,13 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PostUpdatePropertyRequest  $request
      * @param  \App\Models\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Property $property)
+    public function update(PostUpdatePropertyRequest $request, Property $property)
     {
-        //
+        $property->update($request->validated());
     }
 
     /**
@@ -81,6 +81,17 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        $property->delete();
+    }
+
+    /**
+     * Restore the specified resource in storage.
+     *
+     * @param  \App\Models\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Property $property)
+    {
+        $property->restore();
     }
 }

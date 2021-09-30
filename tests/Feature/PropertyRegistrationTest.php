@@ -62,6 +62,140 @@ class PropertyRegistrationTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function a_property_can_be_updated()
+    {
+        $property = Property::create([
+            'title' => 'Titulo da propriedade',
+            'district' => 'Jardim das testadoras',
+            'street' => 'Rua dos testandos',
+            'number' => '128A',
+            'complement' => 'Perto dos testes',
+            'city' => 'Sinop',
+            'uf' => 'MT',
+            'bedrooms' => 3,
+            'suites' => 1,
+            'living_rooms' => 1,
+            'kitchens' => 1,
+            'room_kitchen_combined' => false,
+            'parking_spaces' => 2,
+            'building_area' => 400.50,
+            'total_area' => 600.00,
+            'property_type' => 'aluguel',
+            'property_full_price' => 240,
+            'property_rental_price' => 950.00
+        ]);
+
+        $response = $this->put('/properties/' . $property->id, [
+            'title' => 'Titulo editado',
+            'district' => 'Jardim editado',
+            'street' => 'Rua editada',
+            'number' => '128A editado',
+            'complement' => 'editado',
+            'city' => 'Juina',
+            'uf' => 'MS',
+            'bedrooms' => 2,
+            'suites' => 2,
+            'living_rooms' => 0,
+            'kitchens' => 2,
+            'room_kitchen_combined' => true,
+            'parking_spaces' => 1,
+            'building_area' => 200.00,
+            'total_area' => 1000,
+            'property_type' => 'venda',
+            'property_full_price' => 300500,
+            'property_rental_price' => 0,
+        ]);
+
+        $response->assertOk();
+
+        $this->assertDatabaseCount('properties', 1);
+
+        $this->assertDatabaseHas('properties', [
+            'title' => 'Titulo editado',
+            'district' => 'Jardim editado',
+            'street' => 'Rua editada',
+            'number' => '128A editado',
+            'complement' => 'editado',
+            'city' => 'Juina',
+            'uf' => 'MS',
+            'bedrooms' => 2,
+            'suites' => 2,
+            'living_rooms' => 0,
+            'kitchens' => 2,
+            'room_kitchen_combined' => 1,
+            'parking_spaces' => 1,
+            'building_area' => 200.00,
+            'total_area' => 1000,
+            'property_type' => 'venda',
+            'property_full_price' => 300500,
+            'property_rental_price' => 0,
+        ]);
+    }
+
+    public function test_a_property_can_be_soft_deleted()
+    {
+        $property = Property::create([
+            'title' => 'Titulo da propriedade',
+            'district' => 'Jardim das testadoras',
+            'street' => 'Rua dos testandos',
+            'number' => '128A',
+            'complement' => 'Perto dos testes',
+            'city' => 'Sinop',
+            'uf' => 'MT',
+            'bedrooms' => 3,
+            'suites' => 1,
+            'living_rooms' => 1,
+            'kitchens' => 1,
+            'room_kitchen_combined' => false,
+            'parking_spaces' => 2,
+            'building_area' => 400.50,
+            'total_area' => 600.00,
+            'property_type' => 'aluguel',
+            'property_full_price' => 240,
+            'property_rental_price' => 950.00
+        ]);
+
+        $this->delete('/properties/' . $property->id);
+
+        $this->assertSoftDeleted($property);
+    }
+
+    public function test_a_deleted_property_can_be_restored()
+    {
+        $this->withoutExceptionHandling();
+        $property = Property::create([
+            'title' => 'Titulo da propriedade',
+            'district' => 'Jardim das testadoras',
+            'street' => 'Rua dos testandos',
+            'number' => '128A',
+            'complement' => 'Perto dos testes',
+            'city' => 'Sinop',
+            'uf' => 'MT',
+            'bedrooms' => 3,
+            'suites' => 1,
+            'living_rooms' => 1,
+            'kitchens' => 1,
+            'room_kitchen_combined' => false,
+            'parking_spaces' => 2,
+            'building_area' => 400.50,
+            'total_area' => 600.00,
+            'property_type' => 'aluguel',
+            'property_full_price' => 240,
+            'property_rental_price' => 950.00
+        ]);
+
+        $property->delete();
+        $this->assertSoftDeleted($property);
+
+        $this->put('/properties/' . $property->id . '/restore');
+
+        $property->refresh();
+
+        $this->assertNull($property->deleted_at);
+
+    }
+
     public function test_nullable_fields_property_registration()
     {
         $response = $this->post('/properties', [
