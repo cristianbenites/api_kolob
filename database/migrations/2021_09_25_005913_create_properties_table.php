@@ -34,6 +34,7 @@ class CreatePropertiesTable extends Migration
             $table->decimal('property_full_price', 10,2)->nullable();
             $table->decimal('property_rental_price', 10,2)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
