@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\PropertyController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +16,17 @@ use App\Http\Controllers\PropertyController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
 
 Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
 Route::put('/properties/{property}', [PropertyController::class, 'update'])->name('properties.update');
