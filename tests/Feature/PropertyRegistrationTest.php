@@ -5,12 +5,22 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+use Inertia\Testing\Assert;
+
 use App\Models\Property;
+use App\Models\User;
 
 class PropertyRegistrationTest extends TestCase
 {
 
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->actingAs(User::factory()->create());
+    }
 
     /** @test */
     public function a_property_can_be_added_to_the_database()
@@ -123,7 +133,7 @@ class PropertyRegistrationTest extends TestCase
             'suites' => 2,
             'living_rooms' => 0,
             'kitchens' => 2,
-            'room_kitchen_combined' => 1,
+            'room_kitchen_combined' => true,
             'parking_spaces' => 1,
             'building_area' => 200.00,
             'total_area' => 1000,
@@ -296,5 +306,30 @@ class PropertyRegistrationTest extends TestCase
 
             'Not Decimal property_rental_price' => ['property_rental_price', 'a', 'The property rental price format is invalid.'],
         ];
+    }
+
+    /** @test */
+    public function it_can_load_properties_page()
+    {
+        $properties = Property::factory()->count(3)->create();
+
+        $response = $this->get('/properties');
+
+        $response->assertInertia(fn (Assert $page) => $page
+            ->component('Properties/Index')
+            ->has('properties', 3)
+        );
+    }
+
+    /** @test */
+    public function it_can_load_create_properties_page()
+    {
+        return $this->markTestSkipped('Page still to do');
+
+        $response = $this->get('/properties/create');
+
+        $response->assertInertia(fn (Assert $page) => $page
+            ->component('Properties/Create')
+        );
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Http\Requests\PostUpdatePropertyRequest;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PropertyController extends Controller
 {
@@ -15,7 +16,9 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Properties/Index', [
+            'properties' => Property::all(),
+        ]);
     }
 
     /**
@@ -25,7 +28,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Properties/Create');
     }
 
     /**
