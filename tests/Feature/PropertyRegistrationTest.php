@@ -324,7 +324,7 @@ class PropertyRegistrationTest extends TestCase
     /** @test */
     public function it_can_load_create_properties_page()
     {
-        return $this->markTestSkipped('Page still to do');
+        //return $this->markTestSkipped('Page still to do');
 
         $response = $this->get('/properties/create');
 

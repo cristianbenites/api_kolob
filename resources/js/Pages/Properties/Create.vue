@@ -1,7 +1,7 @@
 <template>
-    <app-layout title="Propriedades">
+    <app-layout title="Profile">
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-100">
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Propriedades
             </h2>
         </template>
