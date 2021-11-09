@@ -4,8 +4,8 @@
 
         <jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            <nav class="bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-800">
                 <!-- Primary Navigation Menu -->
                 <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -34,7 +34,7 @@
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-transparent leading-4 rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-transparent leading-4 rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition dark:bg-gray-800 dark:hover:bg-gray-900 dark:hover:text-gray-300 dark:text-gray-400">
                                                 {{ $page.props.user.current_team.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -48,7 +48,7 @@
                                         <div class="w-60">
                                             <!-- Team Management -->
                                             <template v-if="$page.props.jetstream.hasTeamFeatures">
-                                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                                <div class="block px-4 py-2 text-xs text-gray-400 dark:text-gray-100">
                                                     Manage Team
                                                 </div>
 
@@ -61,10 +61,10 @@
                                                     Create New Team
                                                 </jet-dropdown-link>
 
-                                                <div class="border-t border-gray-100"></div>
+                                                <div class="border-t border-gray-100 dark:border-gray-400"></div>
 
                                                 <!-- Team Switcher -->
-                                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                                <div class="block px-4 py-2 text-xs text-gray-400 dark:text-gray-100">
                                                     Switch Teams
                                                 </div>
 
@@ -89,7 +89,7 @@
                                 <jet-dropdown align="right" width="48">
                                     <template #trigger>
                                         <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                            <img class="object-cover w-8 h-8 rounded-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
+                                            <img class="object-cover w-8 h-8 rounded-full dark:text-gray-100" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">
@@ -105,7 +105,7 @@
 
                                     <template #content>
                                         <!-- Account Management -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
+                                        <div class="block px-4 py-2 text-xs text-gray-400 dark:text-gray-100">
                                             Manage Account
                                         </div>
 
@@ -117,7 +117,7 @@
                                             API Tokens
                                         </jet-dropdown-link>
 
-                                        <div class="border-t border-gray-100"></div>
+                                        <div class="border-t border-gray-100 dark:border-gray-400"></div>
 
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
@@ -132,7 +132,7 @@
 
                         <!-- Hamburger -->
                         <div class="flex items-center -mr-2 sm:hidden">
-                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
+                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 focus:text-gray-400">
                                 <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                                     <path :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -154,15 +154,15 @@
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
+                    <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-400">
                         <div class="flex items-center px-4">
                             <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
                                 <img class="object-cover w-10 h-10 rounded-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                             </div>
 
                             <div>
-                                <div class="text-base font-medium text-gray-800">{{ $page.props.user.name }}</div>
-                                <div class="text-sm font-medium text-gray-500">{{ $page.props.user.email }}</div>
+                                <div class="text-base font-medium text-gray-800 dark:text-gray-100">{{ $page.props.user.name }}</div>
+                                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $page.props.user.email }}</div>
                             </div>
                         </div>
 
@@ -184,9 +184,9 @@
 
                             <!-- Team Management -->
                             <template v-if="$page.props.jetstream.hasTeamFeatures">
-                                <div class="border-t border-gray-200"></div>
+                                <div class="border-t border-gray-200 dark:border-gray-400"></div>
 
-                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                <div class="block px-4 py-2 text-xs text-gray-400 dark:text-gray-100">
                                     Manage Team
                                 </div>
 
@@ -199,10 +199,10 @@
                                     Create New Team
                                 </jet-responsive-nav-link>
 
-                                <div class="border-t border-gray-200"></div>
+                                <div class="border-t border-gray-200 dark:border-gray-400"></div>
 
                                 <!-- Team Switcher -->
-                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                <div class="block px-4 py-2 text-xs text-gray-400 dark:text-gray-100">
                                     Switch Teams
                                 </div>
 
@@ -223,7 +223,7 @@
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
+            <header class="bg-white shadow dark:bg-gray-900 dark:shadow-none dark:border-b-2 dark:border-gray-800" v-if="$slots.header">
                 <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <slot name="header"></slot>
                 </div>
