@@ -15,9 +15,9 @@
                 <div class="flex items-center mt-2">
                     <img class="object-cover w-12 h-12 rounded-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
 
-                    <div class="ml-4 leading-tight">
+                    <div class="ml-4 leading-tight dark:text-gray-100">
                         <div>{{ $page.props.user.name }}</div>
-                        <div class="text-sm text-gray-700">{{ $page.props.user.email }}</div>
+                        <div class="text-sm text-gray-700 dark:text-gray-400">{{ $page.props.user.email }}</div>
                     </div>
                 </div>
             </div>
