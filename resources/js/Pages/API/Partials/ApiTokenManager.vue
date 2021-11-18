@@ -62,7 +62,7 @@
                     <template #content>
                         <div class="space-y-6">
                             <div class="flex items-center justify-between" v-for="token in tokens" :key="token.id">
-                                <div>
+                                <div class="dark:text-gray-400">
                                     {{ token.name }}
                                 </div>
 
@@ -78,7 +78,7 @@
                                         Permissions
                                     </button>
 
-                                    <button class="ml-6 text-sm text-red-500 cursor-pointer" @click="confirmApiTokenDeletion(token)">
+                                    <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400" @click="confirmApiTokenDeletion(token)">
                                         Delete
                                     </button>
                                 </div>
@@ -100,7 +100,7 @@
                     Please copy your new API token. For your security, it won't be shown again.
                 </div>
 
-                <div class="px-4 py-2 mt-4 font-mono text-sm text-gray-500 bg-gray-100 rounded" v-if="$page.props.jetstream.flash.token">
+                <div class="px-4 py-2 mt-4 font-mono text-sm text-gray-500 bg-gray-100 rounded dark:text-gray-400 dark:bg-gray-900" v-if="$page.props.jetstream.flash.token">
                     {{ $page.props.jetstream.flash.token }}
                 </div>
             </template>
@@ -123,7 +123,7 @@
                     <div v-for="permission in availablePermissions" :key="permission">
                         <label class="flex items-center">
                             <jet-checkbox :value="permission" v-model:checked="updateApiTokenForm.permissions"/>
-                            <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
+                            <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ permission }}</span>
                         </label>
                     </div>
                 </div>
