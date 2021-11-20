@@ -30,6 +30,10 @@
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <div class="relative ml-3">
+                                <dark-mode-button/>
+                            </div>
+
+                            <div class="relative ml-3">
                                 <!-- Teams Dropdown -->
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
                                     <template #trigger>
@@ -224,7 +228,7 @@
 
             <!-- Page Heading -->
             <header class="bg-white shadow dark:bg-gray-900 dark:shadow-none dark:border-b-2 dark:border-gray-800" v-if="$slots.header">
-                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="flex justify-between px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <slot name="header"></slot>
                 </div>
             </header>
@@ -245,6 +249,7 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
+    import DarkModeButton from '@/Components/DarkModeButton'
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
@@ -261,6 +266,7 @@
             JetNavLink,
             JetResponsiveNavLink,
             Link,
+            DarkModeButton,
         },
 
         data() {
